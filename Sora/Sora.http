@@ -1,0 +1,11 @@
+### Login with test user
+POST http://localhost:5068/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "1234"
+}
+
+
+###
