@@ -8,6 +8,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Lesson> Lessons { get; set; }
     public DbSet<VocabularyItem> Vocabulary { get; set; }
+    public DbSet<Quiz> Quizzes { get; set; }
     private string DbPath { get; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -15,6 +16,12 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<VocabularyItem>()
             .HasOne<Lesson>()
             .WithMany(l => l.Vocabulary)
+            .HasForeignKey(v => v.LessonId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Quiz>()
+            .HasOne<Lesson>()
+            .WithMany(l => l.Quizzes)
             .HasForeignKey(v => v.LessonId)
             .OnDelete(DeleteBehavior.Cascade);
         

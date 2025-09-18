@@ -15,4 +15,10 @@ public class AuthController(ILogger<AuthController> logger) : ControllerBase
     {
         return Ok("Login");
     }
+
+    [HttpPost]
+    public IActionResult SignUp([FromBody] RegisterRequest request)
+    {
+        return Ok("SignUp");
+    }
 }
