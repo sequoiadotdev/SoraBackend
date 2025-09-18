@@ -1,13 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 using Sora.Data;
 using Sora.Services;
+using Sora.Utils;
 
 DotNetEnv.Env.Load();
+_ = GlobalServices.TokenManager;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddScoped<LessonService>();
+builder.Services.AddScoped<AuthService>();
 
 builder.Services.AddApiVersioning(options =>
 {
@@ -15,6 +18,7 @@ builder.Services.AddApiVersioning(options =>
     options.AssumeDefaultVersionWhenUnspecified = true;
     options.ReportApiVersions = true;
 });
+
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
@@ -26,9 +30,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
+app.UseMiddleware<SoraAuthMiddleware>();
 app.MapControllers();
-
 app.Run();
