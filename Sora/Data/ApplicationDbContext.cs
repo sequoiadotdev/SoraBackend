@@ -27,6 +27,9 @@ public class ApplicationDbContext : DbContext
         
         modelBuilder.Entity<VocabularyItem>()
             .HasIndex(v => v.LessonId);
+
+        modelBuilder.Entity<Quiz>()
+            .HasIndex(v => v.LessonId);
         
         modelBuilder.Entity<User>()
             .HasIndex(u => u.Username)

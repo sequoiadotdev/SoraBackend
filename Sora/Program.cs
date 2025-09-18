@@ -1,9 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Sora.Data;
+using Sora.Services;
+
+DotNetEnv.Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDbContext>();
+builder.Services.AddScoped<LessonService>();
 
 builder.Services.AddApiVersioning(options =>
 {

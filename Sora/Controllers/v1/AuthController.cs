@@ -8,7 +8,6 @@ namespace Sora.Controllers.v1;
 [Route("/api/v{version:apiVersion}/[controller]")]
 public class AuthController(ILogger<AuthController> logger) : ControllerBase
 {
-    private readonly ILogger<AuthController> _logger = logger;
 
     [HttpPost("login")]
     public IActionResult LogIn([FromBody] LoginRequest request)
