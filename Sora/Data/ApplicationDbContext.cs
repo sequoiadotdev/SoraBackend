@@ -6,6 +6,7 @@ namespace Sora.Data;
 public class ApplicationDbContext : DbContext
 {
     public DbSet<User> Users { get; set; }
+    public DbSet<Course> Courses { get; set; }
     public DbSet<Lesson> Lessons { get; set; }
     public DbSet<VocabularyItem> Vocabulary { get; set; }
     public DbSet<Quiz> Quizzes { get; set; }
@@ -13,6 +14,10 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Lesson>()
+            .HasMany<Course>()
+            .WithMany(c => c.Lessons);
+        
         modelBuilder.Entity<VocabularyItem>()
             .HasOne<Lesson>()
             .WithMany(l => l.Vocabulary)
@@ -28,6 +33,9 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<VocabularyItem>()
             .HasIndex(v => v.LessonId);
 
+        modelBuilder.Entity<Lesson>()
+            .HasIndex(l => l.Id);
+        
         modelBuilder.Entity<Quiz>()
             .HasIndex(v => v.LessonId);
         
@@ -35,6 +43,9 @@ public class ApplicationDbContext : DbContext
             .HasIndex(u => u.Username)
             .IsUnique();
 
+        modelBuilder.Entity<User>()
+            .HasIndex(u => u.Email)
+            .IsUnique();
     }
 
     public ApplicationDbContext()
@@ -42,6 +53,7 @@ public class ApplicationDbContext : DbContext
         const Environment.SpecialFolder folder = Environment.SpecialFolder.LocalApplicationData;
         var path = Environment.GetFolderPath(folder);
         DbPath = Path.Combine(path, "Sora.db");
+        Console.WriteLine($"{DbPath}");
     }
     
     protected override void OnConfiguring(DbContextOptionsBuilder options)

@@ -3,9 +3,26 @@ POST http://localhost:5068/api/v1/auth/login
 Content-Type: application/json
 
 {
-  "username": "testuser",
-  "password": "1234"
+  "username": "Sequoia",
+  "password": "Test1234$"
 }
 
+> {% client.global.set("auth_token", response.body.token); %}
 
-###
+### Authorization by token, Use token to query self identity
+GET http://localhost:5068/api/v1/user
+Authorization: Bearer {{auth_token}}
+
+### Test unauthorized
+GET http://localhost:5068/api/v1/user
+
+### Create test user
+
+POST http://localhost:5068/api/v1/auth/signup
+Content-Type: application/json
+
+{
+  "username": "Sequoia",
+  "email": "sequoiadotdev@lumin.sh",
+  "password": "Test1234$"
+}

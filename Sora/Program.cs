@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using Microsoft.AspNetCore.Mvc;
 using Sora.Data;
 using Sora.Services;
@@ -10,7 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddScoped<LessonService>();
+builder.Services.AddScoped<CourseService>();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<SocialService>();
 
 builder.Services.AddApiVersioning(options =>
 {
