@@ -6,7 +6,6 @@ namespace Sora.Utils;
 public class TokenManager
 {
     private static HMACSHA256? _hmacsha256;
-    private const long Epoch = 1756684800;
     public TokenManager(byte[] key)
     {
         _hmacsha256 = new HMACSHA256(key);
