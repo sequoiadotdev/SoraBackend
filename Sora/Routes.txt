@@ -1,0 +1,27 @@
+POST /api/v1/auth/register - Register new user - DONE
+POST /api/v1/auth/login - Login user - DONE
+
+/api/v1/users - Get current user's profile - DONE
+
+GET /api/v1/courses - list all courses - DONE
+GET /api/v1/courses/{id} - get course by id - DONE
+POST /api/v1/courses - create new course - DONE
+PUT /api/v1/courses/{id} - update a course
+DELETE /api/v1/courses/{id} - delete a course
+
+GET /api/v1/courses/{courseId}/lessons - get all lessons - DONE
+GET /api/v1/courses/{courseId}/lessons/{lessonId} - get lesson by id - DONE
+POST /api/v1/courses/{courseId}/lessons - create new lesson
+PUT /api/v1/course/{courseId}/lessons/{lessonId} - update a lesson
+DELETE /api/v1/courses/{courseId}/lessons/{lessonId} - delete a lesson
+
+GET /api/v1/lessons/{lessonId}/vocabulary - get vocab - DONE
+POST /api/v1/lessons/{lessonId}/vocabulary - add new vocab
+PUT /api/v1/lessons/{lessonId}/vocabulary/{vocabId} - update a vocab
+DELETE /api/v1/lessons/{lessonId}/vocabulary/{vocabId} - delete vocab
+
+GET /api/v1/lessons/{lessonId}/quizzes - get quizzes - DONE
+POST /api/v1/lessons/{lessonId}/quizzes - create new quiz
+PUT /api/v1/lessons/{lessonId}/quizzes/{quizId} - update a vocab
+DELETE /api/v1/lessons/{lessonId}/quizzes/{quizId} - delete a quiz
+
