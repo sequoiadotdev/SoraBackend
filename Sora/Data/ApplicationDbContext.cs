@@ -10,6 +10,11 @@ public class ApplicationDbContext : DbContext
     public DbSet<Lesson> Lessons { get; set; }
     public DbSet<VocabularyItem> Vocabulary { get; set; }
     public DbSet<Quiz> Quizzes { get; set; }
+    public DbSet<FriendRequest> FriendRequests { get; set; }
+    public DbSet<Friend> Friends { get; set; }
+    public DbSet<Group> Groups { get; set; }
+    public DbSet<GroupMember> GroupMembers { get; set; }
+    public DbSet<GroupMessage> GroupMessages { get; set; }
     private string DbPath { get; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -45,6 +50,14 @@ public class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<User>()
             .HasIndex(u => u.Email)
+            .IsUnique();
+        
+        modelBuilder.Entity<Friend>()
+            .HasIndex(f => new { f.UserId, f.FriendUserId })
+            .IsUnique();
+
+        modelBuilder.Entity<GroupMember>()
+            .HasIndex(gm => new { gm.GroupId, gm.UserId })
             .IsUnique();
     }
 

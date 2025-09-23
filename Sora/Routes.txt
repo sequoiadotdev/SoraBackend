@@ -11,7 +11,7 @@ DELETE /api/v1/courses/{id} - delete a course
 
 GET /api/v1/courses/{courseId}/lessons - get all lessons - DONE
 GET /api/v1/courses/{courseId}/lessons/{lessonId} - get lesson by id - DONE
-POST /api/v1/courses/{courseId}/lessons - create new lesson
+POST /api/v1/courses/{courseId}/lessons - create new lesson - DONE
 PUT /api/v1/course/{courseId}/lessons/{lessonId} - update a lesson
 DELETE /api/v1/courses/{courseId}/lessons/{lessonId} - delete a lesson
 
