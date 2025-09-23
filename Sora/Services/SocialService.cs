@@ -122,11 +122,30 @@ public class SocialService(ApplicationDbContext db)
 
         db.GroupMembers.Add(new GroupMember
         {
+            Id = GlobalServices.IdGenerator.Next(),
             GroupId = groupId,
             UserId = userId,
             Role = GroupRole.Member
         });
 
+        await db.SaveChangesAsync();
+        return true;
+    }
+
+    public async Task<bool> LeaveGroup(long groupId, long userId)
+    {
+        bool isMember = await db.GroupMembers
+            .AnyAsync(gm => gm.GroupId == groupId && gm.UserId == userId);
+
+        if (!isMember)
+        {
+            return false;
+        }
+        
+        
+        db.GroupMembers
+            .RemoveRange(db.GroupMembers.Where(gm => gm.GroupId == groupId && gm.UserId == userId));
+        
         await db.SaveChangesAsync();
         return true;
     }
@@ -157,6 +176,7 @@ public class SocialService(ApplicationDbContext db)
 
         var message = new GroupMessage
         {
+            Id = GlobalServices.IdGenerator.Next(),
             GroupId = groupId,
             SenderId = senderId,
             Content = content,
